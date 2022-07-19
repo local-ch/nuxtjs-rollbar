@@ -1,0 +1,35 @@
+name: ci
+
+on: push
+
+jobs:
+  ci:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-20.04]
+        node: [16]
+
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v2
+
+      - name: Setup node env 🏗
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ matrix.node }}
+          always-auth: true
+          registry-url: https://npm-proxy.fury.io/localsearch/
+          scope: '@localsearch'
+
+      - name: Install dependencies 👨🏻‍💻
+        uses: bahmutov/npm-install@v1
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.BUNDLE_GEM__FURY__IO}}
+
+      - name: Run linter 👀
+        run: npm run lint
+
+      - name: Run tests 🧪
+        run: npm run test
