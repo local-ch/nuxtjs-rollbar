@@ -24,6 +24,13 @@ npm install @localsearch/nuxtjs-rollbar
 }
 ```
 
+### Available Options
+
+| Option      | Default                    | Description                             |
+|-------------|----------------------------|-----------------------------------------|
+| accessToken | ROLLBAR_ACCESS_TOKEN (ENV) | Rollbar access token (post_server_item) |
+
+
 ## Development
 
 1. Clone this repository
